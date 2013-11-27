@@ -7,6 +7,7 @@ Cutout provides a solution that creates a base64 image out of a CSS Sprite class
 
 ## Example
 css 
+	
 	.sprite {
 	  display:inline-block;
 	  overflow:hidden;
@@ -21,6 +22,7 @@ css
 	}
 
 js
+	
 	cutout("sprite background", function(image) {
 		var div = document.createElement('div');
 		div.style.width = '100px';
