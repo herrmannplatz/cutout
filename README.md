@@ -16,19 +16,23 @@ css
 	}
 	 
 	.background {
-	  width:103px;
-	  height:353px;
+	  width:10px;
+	  height:10px;
 	  background-position: -20px -150px
 	}
+
+	...
 
 js
 	
 	cutout("sprite background", function(image) {
 		var div = document.createElement('div');
-		div.style.width = '100px';
-		div.style.height = '100px';
+		div.style.width = '1000px';
+		div.style.height = '1000px';
 		div.style.background = 'url(' + image + ')';
 		div.style.backgroundSize = 'cover'; 
 		document.body.appendChild(div);
 	});
+
+
 
