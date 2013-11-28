@@ -13,7 +13,7 @@
 		var cvs = document.createElement("canvas");
 		var ctx = cvs.getContext("2d");
 		var x = offsetX || 0;
-		var	y = offsetY || 0;
+		var y = offsetY || 0;
 
 		cvs.width = width || img.width;
 		cvs.height = height || img.height;
