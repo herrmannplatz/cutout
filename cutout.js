@@ -8,8 +8,7 @@
 	var cache = {};
 
 	// convert image to base64
-	function getBase64Image(img, offsetX, offsetY, width, height) {
-	  	
+	function getBase64Image(img, offsetX, offsetY, width, height) {	
 		var cvs = document.createElement("canvas");
 		var ctx = cvs.getContext("2d");
 		var x = offsetX || 0;
@@ -59,7 +58,9 @@
 	// expose
 	if(!window.cutout && canvasSupported) {
 		window.cutout = cutout;
-	}
+	} else {
+		console.warn('cutout.js will not work without canvas');
+    }
 
 })();
 
