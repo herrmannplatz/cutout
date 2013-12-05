@@ -1,5 +1,6 @@
 
 (function(){
+	"use strict";
 
 	// check for canvas
 	var canvasSupported = !!window.HTMLCanvasElement;
@@ -44,13 +45,16 @@
 		document.body.appendChild(div); 
 
 		var style = window.getComputedStyle(div, null);
-		var url = style.backgroundImage.slice(4, -1);
+		var url = style.backgroundImage.slice(4, -1).replace(/"/g, "");
 
 		var img = new Image();
 		img.onload = function(e) {
 			cache[selector] = exportImage(img, style, callback); // cache image
 			document.body.removeChild(div);
 			callback(cache[selector]);
+		};
+		img.onerror = function(e) {
+			callback(null);
 		};
 		img.src = url;
 	}
