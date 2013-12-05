@@ -22,7 +22,7 @@
 	}
 
 	// extract background styles and export as base64
-	function exportImage(img, style, callback) {
+	function exportImage(img, style) {
 		var position = style.backgroundPosition.split(" ");
 		var x = Math.abs(parseInt(position[0]));
 		var y = Math.abs(parseInt(position[1]));
@@ -45,16 +45,17 @@
 		document.body.appendChild(div); 
 
 		var style = window.getComputedStyle(div, null);
-		var url = style.backgroundImage.slice(4, -1).replace(/"/g, "");
+		var url = style.backgroundImage.slice(4, -1)//.replace(/"/g, "");
 
 		var img = new Image();
 		img.onload = function(e) {
-			cache[selector] = exportImage(img, style, callback); // cache image
+			cache[selector] = exportImage(img, style); // cache image
 			document.body.removeChild(div);
 			callback(cache[selector]);
 		};
 		img.onerror = function(e) {
-			callback(null);
+			document.body.removeChild(div);
+			callback(cache[selector]);
 		};
 		img.src = url;
 	}
