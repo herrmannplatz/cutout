@@ -45,7 +45,7 @@
 		document.body.appendChild(div); 
 
 		var style = window.getComputedStyle(div, null);
-		var url = style.backgroundImage.slice(4, -1)//.replace(/"/g, "");
+		var url = style.backgroundImage.slice(4, -1).replace(/"/g, "");
 
 		var img = new Image();
 		img.onload = function(e) {

@@ -34,5 +34,16 @@ js
 		document.body.appendChild(div);
 	});
 
+## jQuery Example
+
+	$('<div/>')
+		.cutout("sprite background")
+		.css({
+			width : '1000px',
+			height : '1000px',
+			backgroundSize : 'cover'
+		})
+		.appendTo($('body'));
+
 
 
