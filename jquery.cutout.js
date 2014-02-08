@@ -18,11 +18,11 @@ if (!!window.HTMLCanvasElement) {
 
             cvs.width = width || img.width;
             cvs.height = height || img.height;
-            ctx.drawImage(img, x, y, cvs.width, cvs.width, 0, 0, cvs.width, cvs.width);
+            ctx.drawImage(img, x, y, cvs.width, cvs.height, 0, 0, cvs.width, cvs.height);
             return cvs.toDataURL("image/png");
         }
 
-        //TODO: optionsj
+        //TODO: options
         function cutout(selector) {
 
             var self = this,

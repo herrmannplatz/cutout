@@ -19,7 +19,7 @@ if (!!window.HTMLCanvasElement) {
 
             cvs.width = width || img.width;
             cvs.height = height || img.height;
-            ctx.drawImage(img, x, y, cvs.width, cvs.width, 0, 0, cvs.width, cvs.width);
+            ctx.drawImage(img, x, y, cvs.width, cvs.height, 0, 0, cvs.width, cvs.height);
             return cvs.toDataURL("image/png");
         }
 
@@ -50,7 +50,6 @@ if (!!window.HTMLCanvasElement) {
             style = window.getComputedStyle(div, null);
             url = style.backgroundImage.slice(4, -1).replace(/"/g, "");
             img = new Image();
-
             img.onload = function() {
                 cache[selector] = exportImage(img, style); // cache image
                 document.body.removeChild(div);
