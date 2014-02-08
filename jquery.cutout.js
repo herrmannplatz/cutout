@@ -1,4 +1,5 @@
-/*global window, document, $ , console */
+/*jslint browser: true */
+/*global $,console*/
 
 // check for canvas
 if (!!window.HTMLCanvasElement) {

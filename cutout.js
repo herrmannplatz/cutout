@@ -1,5 +1,5 @@
-/*jslint es5: true, indent: 4 */
-/*global window, document, Image */
+/*jslint browser: true */
+/*global $,console*/
 
 // check for canvas
 if (!!window.HTMLCanvasElement) {
@@ -65,7 +65,7 @@ if (!!window.HTMLCanvasElement) {
         // expose
         window.cutout = window.cutout || cutout;
 
-    })();
+    }());
 
 }
 
