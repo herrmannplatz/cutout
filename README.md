@@ -1,9 +1,5 @@
 # cutout
-CSS Sprites are a great technique to reduce file size and the number of requests by packing all your images into one single image.
-There are a couple of generators outside (like Texture Packer) that helps you generating the needed css classes.
-
-But using CSS Sprites has also limitations especially when you try to repeat or cover images. 
-Cutout provides a solution that creates a base64 image out of a CSS Sprite class.
+extract images from css sprite sheet.
 
 ## Example
 css 
