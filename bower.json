@@ -1,0 +1,19 @@
+{
+  "name": "cutout",
+  "main": "cutout.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/herrmannplatz/cutout",
+  "authors": [
+    "herrmannplatz <rene@herrmannplatz.de>"
+  ],
+  "description": "Extract images from css sprite sheet.",
+  "keywords": [
+    "css",
+    "sprite",
+    "sheets"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "example"
+  ]
+}
