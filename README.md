@@ -1,9 +1,12 @@
 # cutout
-extract images from css sprite sheet.
+Cutout extracts images from css sprite sheets. It will add the generated image as base64 encoded `background-image` to the specified element. This way you can use 'background-size: cover' and 'background-repeat: repeat' with the desired sprite.
 
-## Example
-css 
-	
+Usage
+------
+
+Use your favourite sprite sheet tool to generate the sprite sheet.
+
+```css 
 	.sprite {
 	  display:inline-block;
 	  overflow:hidden;
@@ -16,22 +19,11 @@ css
 	  height:10px;
 	  background-position: -20px -150px
 	}
+```
 
-	...
+Call the `cutout` function on the desired jquery element with the css class for the sprite you want to extract.
 
-js
-	
-	cutout("sprite background", function(image) {
-		var div = document.createElement('div');
-		div.style.width = '1000px';
-		div.style.height = '1000px';
-		div.style.background = 'url(' + image + ')';
-		div.style.backgroundSize = 'cover'; 
-		document.body.appendChild(div);
-	});
-
-## jQuery Example
-
+```javascript
 	$('<div/>')
 		.cutout("sprite background")
 		.css({
@@ -40,7 +32,4 @@ js
 			backgroundSize : 'cover'
 		})
 		.appendTo($('body'));
-		
-
-
-
+```

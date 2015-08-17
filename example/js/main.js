@@ -1,28 +1,7 @@
-/*jslint browser: true */
-/*global $,cutout */
-
-$(document).ready(function () {
+$(function() {
     "use strict";
 
-// dom    
-    cutout('sprite letter-a', function(image) {
-        var div = document.querySelector('.dom-cover');
-        div.style.width = '100px';
-        div.style.height = '100px';
-        div.style.background = 'url(' + image + ')';
-        div.style.backgroundSize = 'cover';
-    });
-
-    cutout('sprite letter-a', function(image) {
-        var div = document.querySelector('.dom-repeat');
-        div.style.width = '200px';
-        div.style.height = '50px';
-        div.style.background = 'url(' + image + ')';
-        div.style.backgroundRepeat = 'repeat-x';
-    });
-
-// jquery
-    $('.jquery-cover')
+    $('.cover')
         .cutout("sprite letter-b")
         .css({
             width : '100px',
@@ -30,7 +9,7 @@ $(document).ready(function () {
             backgroundSize : 'cover'
         });
 
-    $('.jquery-repeat')
+    $('.repeat')
         .cutout("sprite letter-b")
         .css({
             width : '200px',

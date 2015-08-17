@@ -1,79 +1,77 @@
-/*jslint browser: true */
-/*global $,console*/
+(function($) {
+  'use strict';
 
-// check for canvas
-if (!!window.HTMLCanvasElement) {
+  // cache served images
+  var cache = {};
 
-    (function() {
-        "use strict";
+  // convert image to base64
+  function getBase64Image(img, rect) {
+    var cvs = document.createElement('canvas');
+    var ctx = cvs.getContext('2d');
+    var x = rect.x || 0;
+    var y = rect.y || 0;
 
-        // cache served images
-        var cache = {};
+    cvs.width = rect.width || img.width;
+    cvs.height = rect.height || img.height;
+    ctx.drawImage(img, x, y, cvs.width, cvs.height, 0, 0, cvs.width, cvs.height);
+    return cvs.toDataURL('image/png');
+  }
 
-        // convert image to base64
-        function getBase64Image(img, offsetX, offsetY, width, height) {
-            var cvs = document.createElement("canvas"),
-                ctx = cvs.getContext("2d"),
-                x = offsetX || 0,
-                y = offsetY || 0;
+  function getSpriteRect(element) {
+    var pos = element.css('background-position').split(' ');
+    return {
+      x: Math.abs(parseInt(pos[0], 10)),
+      y: Math.abs(parseInt(pos[1], 10)),
+      width: element.width(),
+      height: element.height()
+    }
+  }
 
-            cvs.width = width || img.width;
-            cvs.height = height || img.height;
-            ctx.drawImage(img, x, y, cvs.width, cvs.height, 0, 0, cvs.width, cvs.height);
-            return cvs.toDataURL("image/png");
-        }
+  function setBackgroundImageURL(element, url) {
+    return element.css({
+      'background-image' : 'url(' + url + ')'
+    });
+  }
 
-        //TODO: options
-        function cutout(selector) {
+  $.fn.extend({
 
-            var self = this,
-                url, div, pos, x, y, w, h;
+    cutout: function(selector) {
+      var self = this;
+      var div;
+      var url;
+      var rect;
 
-            // check cache
-            if (cache[selector]) {
-                console.log('cached');
-                return self.css({
-                    'background-image' : 'url(' + cache[selector] + ')'
-                });
-            }
+      // check cache
+      if (cache[selector]) {
+        return setBackgroundImageURL(self, cache[selector]);
+      }
 
-            // create temporary div
-            div = $('<div></div>')
-                .addClass(selector)
-                .insertBefore($('body'))
-                .hide();
+      // create temporary div
+      div = $('<div/>')
+        .addClass(selector)
+        .insertBefore($('body'))
+        .hide();
 
-            // extract sprite properties
-            url = div.css('background-image').slice(4, -1).replace(/"/g, "");
-            pos = div.css('background-position').split(" ");
-            x = Math.abs(parseInt(pos[0], 10));
-            y = Math.abs(parseInt(pos[1], 10));
-            w = div.width();
-            h = div.height();
+      // extract sprite properties
+      url = div.css('background-image').slice(4, -1).replace(/"/g, '');
+      rect = getSpriteRect(div);
 
-            // clean up
-            div.remove();
+      // clean up
+      div.remove();
 
-            // load sprite sheet
-            $('<img/>')
-                .load(function() {
-                    cache[selector] = getBase64Image(this, x, y, w, h);
-                    self.css({
-                        'background-image' : 'url(' + cache[selector] + ')'
-                    });
-                })
-                .error(function() {
-                    console.warn('unable to get image from class ' + selector);
-                })
-                .attr({ src : url });
+      // load sprite sheet
+      $('<img/>')
+        .load(function() {
+          cache[selector] = getBase64Image(this, rect);
+          setBackgroundImageURL(self, cache[selector]);
+        })
+        .error(function() {
+          console.warn('unable to get image from class ' + selector);
+        })
+        .attr({ src : url });
 
-            return self;
-        }
+      return self;
+    }
+  });
 
-        if (!$.fn.cutout) {
-            $.fn.cutout = cutout;
-        }
-
-    }());
-
-}
+}(jQuery));
